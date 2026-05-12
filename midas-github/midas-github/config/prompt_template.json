@@ -1,0 +1,21 @@
+{
+  "niche": "AI Wealth Psychology",
+  "voice": "en-US-GuyNeural",
+  "hook_patterns": [
+    "contrarian truth",
+    "hidden secret",
+    "costly mistake",
+    "future shock"
+  ],
+  "script_structure": {
+    "hook_seconds": 3,
+    "tension_seconds": 10,
+    "value_seconds": 25,
+    "cta_seconds": 5,
+    "target_word_count": 120
+  },
+  "style_notes": "Cinematic. Confident. Slightly contrarian. Avoid hedging language.",
+  "affiliate_link": "",
+  "bio_link": "",
+  "last_updated": "2026-05-12"
+}
