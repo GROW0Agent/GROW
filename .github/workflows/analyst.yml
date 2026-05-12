@@ -1,0 +1,32 @@
+name: MIDAS - Weekly Analyst
+
+on:
+  schedule:
+    - cron: '0 3 * * 1'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  analyze:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: 'pip'
+      - run: pip install -r requirements.txt
+      - env:
+          GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
+          YT_CLIENT_ID: ${{ secrets.YT_CLIENT_ID }}
+          YT_CLIENT_SECRET: ${{ secrets.YT_CLIENT_SECRET }}
+          YT_REFRESH_TOKEN: ${{ secrets.YT_REFRESH_TOKEN }}
+        run: python scripts/analyst.py
+      - run: |
+          git config user.name "MIDAS Bot"
+          git config user.email "bot@midas.local"
+          git add content/ config/ || true
+          git diff --staged --quiet || git commit -m "Analyst tune $(date -u +%Y-%m-%d) [skip ci]"
+          git push || true
